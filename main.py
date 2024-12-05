@@ -4,12 +4,13 @@ import io
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtGui import QPainter, QColor, QPolygon
+from UI import Ui_MainWindow
 
 
-class Circles(QMainWindow):
+class Circles(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.setFixedSize(600, 600)
         self.btn.move(250, 250)
         self.btn.setText('Рисовать')
@@ -21,7 +22,8 @@ class Circles(QMainWindow):
         if self.flag:
             qp = QPainter()
             qp.begin(self)
-            qp.setBrush(QColor(255, 255, 0))
+            r, g, b = random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+            qp.setBrush(QColor(r, g, b))
             x, y = random.randint(50, 350), random.randint(50, 350)
             size = random.randint(5, 100)
             qp.drawEllipse(x, y, size, size)
